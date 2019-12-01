@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Rorschach" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GRM-SO-iM1" customClass="RorschachView" customModule="Rorschach" customModuleProvider="target">
+                                <rect key="frame" x="20" y="266" width="374" height="374"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="GRM-SO-iM1" secondAttribute="height" multiplier="1:1" id="t8F-Us-Keh"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gul-di-SN2">
+                                <rect key="frame" x="181" y="715" width="52" height="30"/>
+                                <state key="normal" title="Redraw"/>
+                                <connections>
+                                    <action selector="redraw:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z4f-ZA-XfC"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="Q0J-za-aWF">
+                                <rect key="frame" x="20" y="227" width="374" height="32"/>
+                                <segments>
+                                    <segment title="None"/>
+                                    <segment title="Horizontal"/>
+                                    <segment title="Vertical"/>
+                                    <segment title="Both"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeMirroring:" destination="BYZ-38-t0r" eventType="valueChanged" id="Oj2-20-MUv"/>
+                                </connections>
+                            </segmentedControl>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="3" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="N0R-t4-7v7">
+                                <rect key="frame" x="18" y="677" width="378" height="31"/>
+                                <connections>
+                                    <action selector="changeGridSize:" destination="BYZ-38-t0r" eventType="valueChanged" id="5fj-Kh-tbT"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grid Size:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLk-OB-UPX">
+                                <rect key="frame" x="20" y="648" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="d5S-PW-R7E">
+                                <rect key="frame" x="20" y="187" width="374" height="32"/>
+                                <segments>
+                                    <segment title="Squares"/>
+                                    <segment title="Dots"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeShape:" destination="BYZ-38-t0r" eventType="valueChanged" id="Kk0-aO-gLl"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="N0R-t4-7v7" firstAttribute="top" secondItem="qLk-OB-UPX" secondAttribute="bottom" constant="8" id="0iW-yZ-4iJ"/>
+                            <constraint firstItem="GRM-SO-iM1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="3RZ-Me-s2q"/>
+                            <constraint firstItem="GRM-SO-iM1" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="5Mw-Hb-ZNv"/>
+                            <constraint firstItem="N0R-t4-7v7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="BY6-hw-q9i"/>
+                            <constraint firstItem="qLk-OB-UPX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="FDk-ia-VcU"/>
+                            <constraint firstItem="GRM-SO-iM1" firstAttribute="top" secondItem="Q0J-za-aWF" secondAttribute="bottom" constant="8" id="FSh-md-JMd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qLk-OB-UPX" secondAttribute="trailing" constant="20" id="LyC-cd-Atp"/>
+                            <constraint firstItem="GRM-SO-iM1" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Qem-kN-1Df"/>
+                            <constraint firstItem="gul-di-SN2" firstAttribute="top" secondItem="N0R-t4-7v7" secondAttribute="bottom" constant="8" id="Sia-Pl-fmy"/>
+                            <constraint firstItem="d5S-PW-R7E" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="VgF-Oe-LfC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Q0J-za-aWF" secondAttribute="trailing" constant="20" id="WTm-zK-qbN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="d5S-PW-R7E" secondAttribute="trailing" constant="20" id="XvI-bL-9ps"/>
+                            <constraint firstItem="Q0J-za-aWF" firstAttribute="top" secondItem="d5S-PW-R7E" secondAttribute="bottom" constant="9" id="ZQ7-jw-oeF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N0R-t4-7v7" secondAttribute="trailing" constant="20" id="fPf-Y5-HKJ"/>
+                            <constraint firstItem="gul-di-SN2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="faL-EW-MYi"/>
+                            <constraint firstItem="qLk-OB-UPX" firstAttribute="top" secondItem="GRM-SO-iM1" secondAttribute="bottom" constant="8" id="isY-mZ-2ys"/>
+                            <constraint firstItem="Q0J-za-aWF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="uij-nX-lSx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="gridSizeLabel" destination="qLk-OB-UPX" id="xPi-VA-aFE"/>
+                        <outlet property="gridSizeSlider" destination="N0R-t4-7v7" id="exF-l2-Dvl"/>
+                        <outlet property="mirroringSelector" destination="Q0J-za-aWF" id="l5o-kz-vPr"/>
+                        <outlet property="rorschachView" destination="GRM-SO-iM1" id="lah-08-qME"/>
+                        <outlet property="shapeSelector" destination="d5S-PW-R7E" id="jLq-JI-VH3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="-1.3392857142857142"/>
+        </scene>
+    </scenes>
+</document>
