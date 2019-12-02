@@ -8,37 +8,23 @@
 
 import UIKit
 
-enum Mirroring: CaseIterable {
-    case none
-    case horizontal
-    case vertical
-    case both
-}
-
-enum Shape: CaseIterable {
-    case square
-    case dot
-}
 
 class RorschachView: UIView {
     
-    var gridSize: CGFloat = 7
-    var spacing: Bool = false
-    var shape: Shape = .square
-    var mirroring: Mirroring = .none
+    var grid: Grid = Grid(size: 16) {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
-    var shouldRedrawSameGrid = false
-    
-    var previousGrid: [CGPoint] = []
-    
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
+        
+        grid.resetGrid()
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
         func addShape(in rect: CGRect) {
-            switch shape {
+            switch grid.shape {
             case .dot:
                 context.addEllipse(in: rect)
             case .square:
@@ -46,65 +32,65 @@ class RorschachView: UIView {
             }
         }
         
-        let size = rect.width / gridSize
+        let size = rect.width / CGFloat(grid.size)
         
-        guard !shouldRedrawSameGrid else {
-            for point in previousGrid {
-                addShape(in: CGRect(x: point.x, y: point.y, width: size, height: size))
-            }
-            context.fillPath()
-            shouldRedrawSameGrid = false
-            return
-        }
+        let halfGridSize = grid.size / 2
         
-        var previousGrid: [CGPoint] = []
-        
-        for x in stride(from: 0, through: rect.width, by: size) {
-            for y in stride(from: 0, through: rect.height, by: size) {
+        for nX in 0..<grid.size {
+            let nX = CGFloat(nX)
+            
+            for nY in 0..<grid.size {
+                let nY = CGFloat(nY)
                 
-                guard Bool.random() else { continue }
+                let random = Bool.random()
+                
+                guard random == true else { continue }
                 
                 context.setFillColor(UIColor.black.cgColor)
                 
-                switch mirroring {
+                let x = nX * size
+                let y = nY * size
+                
+                switch grid.mirroring {
                 case .none:
                     
-                    let ellipse = CGRect(x: x, y: y, width: size, height: size)
+                    grid.points[Int(nX)][Int(nY)] = true
                     
-                    previousGrid.append(CGPoint(x: x, y: y))
+                    let ellipse = CGRect(x: x, y: y, width: size, height: size)
                     addShape(in: ellipse)
                     
                 case .horizontal:
                     
-                    guard x < rect.width / 2 else { continue }
+                    guard Int(nX) <= halfGridSize else { continue }
+                    
+                    grid.points[Int(nX)][Int(nY)] = true
                     
                     let ellipse = CGRect(x: x, y: y, width: size, height: size)
-                    
                     let mirroredX = rect.width - x
                     let horizontalMirroredEllipse = CGRect(x: mirroredX - size, y: y, width: size, height: size)
-                    
-                    previousGrid.append(CGPoint(x: x, y: y))
-                    previousGrid.append(CGPoint(x: mirroredX - size, y: y))
                     
                     addShape(in: ellipse)
                     addShape(in: horizontalMirroredEllipse)
                     
-                    
                 case .vertical:
                     
-                    guard y < rect.height / 2 else { continue }
+                    guard Int(nY) <= halfGridSize else { continue }
+                    
+                    grid.points[Int(nX)][Int(nY)] = true
+                    
                     let mirroredY = rect.height - y
                     let ellipse = CGRect(x: x, y: y, width: size, height: size)
                     let verticalMirroredEllipse = CGRect(x: x, y: mirroredY - size, width: size, height: size)
-                
-                    previousGrid.append(CGPoint(x: x, y: mirroredY - size))
+                    
                     addShape(in: ellipse)
                     addShape(in: verticalMirroredEllipse)
                     
                 case .both:
                     
-                    guard x < rect.width / 2 &&
-                        y < rect.height / 2 else { continue }
+                    guard Int(nX) <= halfGridSize &&
+                        Int(nY) <= halfGridSize else { continue }
+                    
+                    grid.points[Int(nX)][Int(nY)] = true
                     
                     let mirroredX = rect.width - x
                     let mirroredY = rect.height - y
@@ -114,11 +100,6 @@ class RorschachView: UIView {
                     let verticalMirroredEllipse = CGRect(x: x, y: mirroredY - size, width: size, height: size)
                     let bothMirroredEllipse = CGRect(x: mirroredX - size, y: mirroredY - size, width: size, height: size)
                     
-                    previousGrid.append(CGPoint(x: x, y: y))
-                    previousGrid.append(CGPoint(x: mirroredX - size, y: y))
-                    previousGrid.append(CGPoint(x: x, y: mirroredY - size))
-                    previousGrid.append(CGPoint(x: mirroredX - size, y: mirroredY - size))
-                    
                     addShape(in: ellipse)
                     addShape(in: verticalMirroredEllipse)
                     addShape(in: horizontalMirroredEllipse)
@@ -126,8 +107,9 @@ class RorschachView: UIView {
                 }
             }
         }
+        
+        context.setFillColor(UIColor.white.cgColor)
         context.fillPath()
-        self.previousGrid = previousGrid
     }
     
     func addShape(shape: Shape, in rect: CGRect, context: CGContext) {
@@ -137,5 +119,12 @@ class RorschachView: UIView {
         case .square:
             context.addRect(rect)
         }
+    }
+}
+
+extension CGPoint: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(x)
+        hasher.combine(y)
     }
 }

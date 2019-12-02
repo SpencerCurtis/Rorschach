@@ -17,18 +17,30 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GRM-SO-iM1" customClass="RorschachView" customModule="Rorschach" customModuleProvider="target">
                                 <rect key="frame" x="20" y="266" width="374" height="374"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GRM-SO-iM1" secondAttribute="height" multiplier="1:1" id="t8F-Us-Keh"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gul-di-SN2">
-                                <rect key="frame" x="181" y="715" width="52" height="30"/>
-                                <state key="normal" title="Redraw"/>
-                                <connections>
-                                    <action selector="redraw:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z4f-ZA-XfC"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zu3-aJ-WPx">
+                                <rect key="frame" x="20" y="714.5" width="374" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gul-di-SN2">
+                                        <rect key="frame" x="0.0" y="0.0" width="177" height="30"/>
+                                        <state key="normal" title="Redraw"/>
+                                        <connections>
+                                            <action selector="redraw:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z4f-ZA-XfC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KU-oo-s9b">
+                                        <rect key="frame" x="197" y="0.0" width="177" height="30"/>
+                                        <state key="normal" title="Save Image"/>
+                                        <connections>
+                                            <action selector="saveImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VHF-o2-wW1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="Q0J-za-aWF">
                                 <rect key="frame" x="20" y="227" width="374" height="32"/>
                                 <segments>
@@ -41,19 +53,19 @@
                                     <action selector="changeMirroring:" destination="BYZ-38-t0r" eventType="valueChanged" id="Oj2-20-MUv"/>
                                 </connections>
                             </segmentedControl>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="3" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="N0R-t4-7v7">
-                                <rect key="frame" x="18" y="677" width="378" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="16" minValue="3" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="N0R-t4-7v7">
+                                <rect key="frame" x="18" y="676.5" width="378" height="31"/>
                                 <connections>
                                     <action selector="changeGridSize:" destination="BYZ-38-t0r" eventType="valueChanged" id="5fj-Kh-tbT"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grid Size:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLk-OB-UPX">
-                                <rect key="frame" x="20" y="648" width="374" height="21"/>
+                                <rect key="frame" x="20" y="648" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="d5S-PW-R7E">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="d5S-PW-R7E">
                                 <rect key="frame" x="20" y="187" width="374" height="32"/>
                                 <segments>
                                     <segment title="Squares"/>
@@ -64,7 +76,7 @@
                                 </connections>
                             </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="N0R-t4-7v7" firstAttribute="top" secondItem="qLk-OB-UPX" secondAttribute="bottom" constant="8" id="0iW-yZ-4iJ"/>
                             <constraint firstItem="GRM-SO-iM1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="3RZ-Me-s2q"/>
@@ -74,14 +86,15 @@
                             <constraint firstItem="GRM-SO-iM1" firstAttribute="top" secondItem="Q0J-za-aWF" secondAttribute="bottom" constant="8" id="FSh-md-JMd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qLk-OB-UPX" secondAttribute="trailing" constant="20" id="LyC-cd-Atp"/>
                             <constraint firstItem="GRM-SO-iM1" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Qem-kN-1Df"/>
-                            <constraint firstItem="gul-di-SN2" firstAttribute="top" secondItem="N0R-t4-7v7" secondAttribute="bottom" constant="8" id="Sia-Pl-fmy"/>
                             <constraint firstItem="d5S-PW-R7E" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="VgF-Oe-LfC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Q0J-za-aWF" secondAttribute="trailing" constant="20" id="WTm-zK-qbN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="d5S-PW-R7E" secondAttribute="trailing" constant="20" id="XvI-bL-9ps"/>
                             <constraint firstItem="Q0J-za-aWF" firstAttribute="top" secondItem="d5S-PW-R7E" secondAttribute="bottom" constant="9" id="ZQ7-jw-oeF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N0R-t4-7v7" secondAttribute="trailing" constant="20" id="fPf-Y5-HKJ"/>
-                            <constraint firstItem="gul-di-SN2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="faL-EW-MYi"/>
+                            <constraint firstItem="Zu3-aJ-WPx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="gen-rC-LJu"/>
                             <constraint firstItem="qLk-OB-UPX" firstAttribute="top" secondItem="GRM-SO-iM1" secondAttribute="bottom" constant="8" id="isY-mZ-2ys"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zu3-aJ-WPx" secondAttribute="trailing" constant="20" id="rxl-Bg-D1S"/>
+                            <constraint firstItem="Zu3-aJ-WPx" firstAttribute="top" secondItem="N0R-t4-7v7" secondAttribute="bottom" constant="8" id="sTg-3q-6zg"/>
                             <constraint firstItem="Q0J-za-aWF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="uij-nX-lSx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

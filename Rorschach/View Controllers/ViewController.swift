@@ -16,19 +16,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var gridSizeSlider: UISlider!
     @IBOutlet weak var gridSizeLabel: UILabel!
     
-//    lazy var link: CADisplayLink = {
-//        let link = CADisplayLink(target: self, selector: #selector(reloadRorschachView))
-//        link.preferredFramesPerSecond = 2
-//        link.add(to: .current, forMode: .default)
-//        return link
-//    }()
-//
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         changeMirroring(self)
         changeGridSize(self)
-//        _ = link
+        changeShape(self)
     }
 
     @IBAction func redraw(_ sender: Any) {
@@ -36,22 +28,38 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeMirroring(_ sender: Any) {
-        rorschachView.mirroring = Mirroring.allCases[mirroringSelector.selectedSegmentIndex]
+        rorschachView.grid.mirroring = Mirroring.allCases[mirroringSelector.selectedSegmentIndex]
         rorschachView.setNeedsDisplay()
     }
     
     @IBAction func changeShape(_ sender: Any) {
-        rorschachView.shape = Shape.allCases[shapeSelector.selectedSegmentIndex]
-        rorschachView.shouldRedrawSameGrid = true
+        rorschachView.grid.shape = Shape.allCases[shapeSelector.selectedSegmentIndex]
+//        rorschachView.grid.shouldRedrawSameGrid = true
         rorschachView.setNeedsDisplay()
     }
     
     @IBAction func changeGridSize(_ sender: Any) {
-        rorschachView.gridSize = CGFloat(Int(gridSizeSlider.value))
+        rorschachView.grid.size = Int(gridSizeSlider.value)
         gridSizeLabel.text = "Grid Size: \(Int(gridSizeSlider.value))"
         rorschachView.setNeedsDisplay()
     }
     
+    @IBAction func saveImage(_ sender: Any) {
+        ImageRenderer.saveImageToPhotoLibrary(using: rorschachView.grid, contextSize: CGSize(width: 10000, height: 10000)) { (success) in
+            
+            var title: String
+            
+            title = success ? "Image saved successfully!" : "Image was unable to be saved."
+            
+            let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(okAction)
+            
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
     
     @objc func reloadRorschachView() {
         rorschachView.setNeedsDisplay()
