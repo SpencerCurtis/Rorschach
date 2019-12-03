@@ -22,7 +22,7 @@ class ImageRenderer {
             return
         }
         
-        context.setFillColor(UIColor.black.cgColor)
+        context.setFillColor(UIColor.systemBackground.cgColor)
         context.fill(CGRect(origin: CGPoint(x: 0, y: 0), size: contextSize))
         
         func addShape(in rect: CGRect) {
@@ -77,7 +77,7 @@ class ImageRenderer {
             }
         }
         
-        context.setFillColor(UIColor.white.cgColor)
+        context.setFillColor(UIColor.label.cgColor)
         context.fillPath()
         
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else {

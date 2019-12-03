@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,28 +12,28 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Rorschach" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GRM-SO-iM1" customClass="RorschachView" customModule="Rorschach" customModuleProvider="target">
-                                <rect key="frame" x="20" y="266" width="374" height="374"/>
+                                <rect key="frame" x="20" y="243.66666666666663" width="335" height="335"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GRM-SO-iM1" secondAttribute="height" multiplier="1:1" id="t8F-Us-Keh"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zu3-aJ-WPx">
-                                <rect key="frame" x="20" y="714.5" width="374" height="30"/>
+                                <rect key="frame" x="20" y="653" width="335" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gul-di-SN2">
-                                        <rect key="frame" x="0.0" y="0.0" width="177" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="30"/>
                                         <state key="normal" title="Redraw"/>
                                         <connections>
                                             <action selector="redraw:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z4f-ZA-XfC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KU-oo-s9b">
-                                        <rect key="frame" x="197" y="0.0" width="177" height="30"/>
+                                        <rect key="frame" x="177.66666666666663" y="0.0" width="157.33333333333337" height="30"/>
                                         <state key="normal" title="Save Image"/>
                                         <connections>
                                             <action selector="saveImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VHF-o2-wW1"/>
@@ -42,7 +42,7 @@
                                 </subviews>
                             </stackView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="Q0J-za-aWF">
-                                <rect key="frame" x="20" y="227" width="374" height="32"/>
+                                <rect key="frame" x="20" y="204.66666666666666" width="335" height="32"/>
                                 <segments>
                                     <segment title="None"/>
                                     <segment title="Horizontal"/>
@@ -54,19 +54,19 @@
                                 </connections>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="16" minValue="3" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="N0R-t4-7v7">
-                                <rect key="frame" x="18" y="676.5" width="378" height="31"/>
+                                <rect key="frame" x="18" y="615" width="339" height="31"/>
                                 <connections>
                                     <action selector="changeGridSize:" destination="BYZ-38-t0r" eventType="valueChanged" id="5fj-Kh-tbT"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grid Size:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLk-OB-UPX">
-                                <rect key="frame" x="20" y="648" width="374" height="20.5"/>
+                                <rect key="frame" x="20" y="586.66666666666663" width="335" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="d5S-PW-R7E">
-                                <rect key="frame" x="20" y="187" width="374" height="32"/>
+                                <rect key="frame" x="20" y="164.66666666666666" width="335" height="32"/>
                                 <segments>
                                     <segment title="Squares"/>
                                     <segment title="Dots"/>

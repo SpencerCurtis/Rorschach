@@ -34,7 +34,6 @@ class ViewController: UIViewController {
     
     @IBAction func changeShape(_ sender: Any) {
         rorschachView.grid.shape = Shape.allCases[shapeSelector.selectedSegmentIndex]
-//        rorschachView.grid.shouldRedrawSameGrid = true
         rorschachView.setNeedsDisplay()
     }
     
@@ -48,7 +47,6 @@ class ViewController: UIViewController {
         ImageRenderer.saveImageToPhotoLibrary(using: rorschachView.grid, contextSize: CGSize(width: 10000, height: 10000)) { (success) in
             
             var title: String
-            
             title = success ? "Image saved successfully!" : "Image was unable to be saved."
             
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)

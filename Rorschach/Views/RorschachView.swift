@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class RorschachView: UIView {
     
     var grid: Grid = Grid(size: 16) {
@@ -44,7 +43,7 @@ class RorschachView: UIView {
                 
                 let random = Bool.random()
                 
-                guard random == true else { continue }
+                guard random else { continue }
                 
                 context.setFillColor(UIColor.black.cgColor)
                 
@@ -108,7 +107,7 @@ class RorschachView: UIView {
             }
         }
         
-        context.setFillColor(UIColor.white.cgColor)
+        context.setFillColor(UIColor.label.cgColor)
         context.fillPath()
     }
     

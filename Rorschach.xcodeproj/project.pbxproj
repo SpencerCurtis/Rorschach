@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		462E31BD239438E00027D782 /* ImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E31BC239438E00027D782 /* ImageRenderer.swift */; };
+		462E31BF2394D30A0027D782 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E31BE2394D30A0027D782 /* Grid.swift */; };
 		4650EC6A239403580081D3FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4650EC69239403580081D3FA /* AppDelegate.swift */; };
 		4650EC6C239403580081D3FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4650EC6B239403580081D3FA /* SceneDelegate.swift */; };
 		4650EC6E239403580081D3FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4650EC6D239403580081D3FA /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		462E31BC239438E00027D782 /* ImageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRenderer.swift; sourceTree = "<group>"; };
+		462E31BE2394D30A0027D782 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		4650EC66239403580081D3FA /* Rorschach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rorschach.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4650EC69239403580081D3FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4650EC6B239403580081D3FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +43,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		462E31C02394D3D70027D782 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4650EC69239403580081D3FA /* AppDelegate.swift */,
+				4650EC6B239403580081D3FA /* SceneDelegate.swift */,
+				4650EC72239403590081D3FA /* Assets.xcassets */,
+				4650EC77239403590081D3FA /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		462E31C12394D3E00027D782 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4650EC6F239403580081D3FA /* Main.storyboard */,
+				4650EC74239403590081D3FA /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		4650EC5D239403580081D3FA = {
 			isa = PBXGroup;
 			children = (
@@ -58,16 +82,46 @@
 		4650EC68239403580081D3FA /* Rorschach */ = {
 			isa = PBXGroup;
 			children = (
-				4650EC69239403580081D3FA /* AppDelegate.swift */,
-				4650EC6B239403580081D3FA /* SceneDelegate.swift */,
-				4650EC6D239403580081D3FA /* ViewController.swift */,
-				4650EC7D239403990081D3FA /* RorschachView.swift */,
-				4650EC6F239403580081D3FA /* Main.storyboard */,
-				4650EC72239403590081D3FA /* Assets.xcassets */,
-				4650EC74239403590081D3FA /* LaunchScreen.storyboard */,
-				4650EC77239403590081D3FA /* Info.plist */,
+				46CECCBC2394D42F0063FB47 /* View Controllers */,
+				46CECCBB2394D4290063FB47 /* Helpers */,
+				46CECCBA2394D4250063FB47 /* Model */,
+				46CECCB92394D41E0063FB47 /* Views */,
+				462E31C12394D3E00027D782 /* Storyboards */,
+				462E31C02394D3D70027D782 /* Resources */,
 			);
 			path = Rorschach;
+			sourceTree = "<group>";
+		};
+		46CECCB92394D41E0063FB47 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4650EC7D239403990081D3FA /* RorschachView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		46CECCBA2394D4250063FB47 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				462E31BE2394D30A0027D782 /* Grid.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		46CECCBB2394D4290063FB47 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				462E31BC239438E00027D782 /* ImageRenderer.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		46CECCBC2394D42F0063FB47 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4650EC6D239403580081D3FA /* ViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +199,8 @@
 				4650EC6A239403580081D3FA /* AppDelegate.swift in Sources */,
 				4650EC7E239403990081D3FA /* RorschachView.swift in Sources */,
 				4650EC6C239403580081D3FA /* SceneDelegate.swift in Sources */,
+				462E31BD239438E00027D782 /* ImageRenderer.swift in Sources */,
+				462E31BF2394D30A0027D782 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +346,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W4BT774F98;
-				INFOPLIST_FILE = Rorschach/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Rorschach/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,7 +364,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W4BT774F98;
-				INFOPLIST_FILE = Rorschach/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Rorschach/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
