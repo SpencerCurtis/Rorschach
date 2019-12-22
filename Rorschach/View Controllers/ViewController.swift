@@ -18,9 +18,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         changeMirroring(self)
         changeGridSize(self)
         changeShape(self)
+        
+        gridSizeLabel.text = "Grid Size: \(Int(gridSizeSlider.value))"
+
     }
 
     @IBAction func redraw(_ sender: Any) {
@@ -38,9 +42,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeGridSize(_ sender: Any) {
-        rorschachView.grid.size = Int(gridSizeSlider.value)
-        gridSizeLabel.text = "Grid Size: \(Int(gridSizeSlider.value))"
-        rorschachView.setNeedsDisplay()
+        
+        let gridSize = rorschachView.grid.size
+        let newGridSize = Int(gridSizeSlider.value)
+        
+        if gridSize != newGridSize {
+            rorschachView.grid.size = Int(gridSizeSlider.value)
+            gridSizeLabel.text = "Grid Size: \(Int(gridSizeSlider.value))"
+            rorschachView.setNeedsDisplay()
+        }
     }
     
     @IBAction func saveImage(_ sender: Any) {
@@ -57,10 +67,6 @@ class ViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }
-    }
-    
-    @objc func reloadRorschachView() {
-        rorschachView.setNeedsDisplay()
     }
 }
 
