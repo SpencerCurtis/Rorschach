@@ -11,19 +11,13 @@ import Photos
 
 class ImageRenderer {
     
-    static func saveImageToPhotoLibrary(using grid: Grid,
-                            contextSize: CGSize,
-                            completion: @escaping (Bool) -> Void) {
-        
-        UIGraphicsBeginImageContext(contextSize)
-        
-        guard let context = UIGraphicsGetCurrentContext() else {
-            completion(false)
-            return
-        }
+    static func drawGrid(using grid: Grid,
+        context: CGContext,
+        size: CGSize) {
         
         context.setFillColor(UIColor.systemBackground.cgColor)
-        context.fill(CGRect(origin: CGPoint(x: 0, y: 0), size: contextSize))
+        context.fill(CGRect(origin: CGPoint(x: 0, y: 0), size: size))
+        
         
         func addShape(in rect: CGRect) {
             switch grid.shape {
@@ -34,51 +28,97 @@ class ImageRenderer {
             }
         }
         
-        let size = contextSize.width / CGFloat(grid.size)
+        let itemSize = size.width / CGFloat(grid.size)
         
-        switch grid.mirroring {
+        for (xIndex, array) in grid.points.enumerated() {
             
-        case .none:
-            for (xN, x) in grid.points.enumerated() {
-                for (yN, shouldDraw) in x.enumerated() {
-                    guard shouldDraw else { continue }
-                    
-                    addShape(in: CGRect(x: CGFloat(xN) * size, y: CGFloat(yN) * size, width: size, height: size))
-                }
+            if grid.mirroring == .horizontal ||
+                grid.mirroring == .both {
+                
+                guard xIndex <= grid.halfSize else { continue }
             }
-        case .horizontal:
-            for (xN, x) in grid.points.enumerated() {
-                for (yN, shouldDraw) in x.enumerated() {
-                    guard shouldDraw else { continue }
+            
+            for (yIndex, point) in array.enumerated() {
+                
+                
+                if grid.mirroring == .vertical ||
+                    grid.mirroring == .both {
                     
-                    addShape(in: CGRect(x: CGFloat(xN) * size, y: CGFloat(yN) * size, width: size, height: size))
-                    addShape(in: CGRect(x: CGFloat(grid.size - xN - 1) * size, y: CGFloat(yN) * size, width: size, height: size))
+                    guard yIndex <= grid.halfSize else { continue }
                 }
-            }
-        case .vertical:
-            for (xN, x) in grid.points.enumerated() {
-                for (yN, shouldDraw) in x.enumerated() {
-                    guard shouldDraw else { continue }
+                
+                
+                let x = CGFloat(xIndex) * itemSize
+                let y = CGFloat(yIndex) * itemSize
+                
+                context.setFillColor(point.color)
+                
+                switch grid.mirroring {
+                case .none:
                     
-                    addShape(in: CGRect(x: CGFloat(xN) * size, y: CGFloat(yN) * size, width: size, height: size))
-                    addShape(in: CGRect(x: CGFloat(xN) * size, y: CGFloat(grid.size - yN - 1) * size, width: size, height: size))
-                }
-            }
-        case .both:
-            for (xN, x) in grid.points.enumerated() {
-                for (yN, shouldDraw) in x.enumerated() {
-                    guard shouldDraw else { continue }
+                    let ellipse = CGRect(x: x, y: y, width: itemSize, height: itemSize)
+                    addShape(in: ellipse)
                     
-                    addShape(in: CGRect(x: CGFloat(xN) * size, y: CGFloat(yN) * size, width: size, height: size))
-                    addShape(in: CGRect(x: CGFloat(grid.size - xN - 1) * size, y: CGFloat(yN) * size, width: size, height: size))
-                    addShape(in: CGRect(x: CGFloat(xN) * size, y: CGFloat(grid.size - yN - 1) * size, width: size, height: size))
-                    addShape(in: CGRect(x: CGFloat(grid.size - xN - 1) * size, y: CGFloat(grid.size - yN - 1) * size, width: size, height: size))
+                case .horizontal:
+                    
+                    guard xIndex <= grid.halfSize else { continue }
+                    
+                    let ellipse = CGRect(x: x, y: y, width: itemSize, height: itemSize)
+                    let mirroredX = size.width - x
+                    let horizontalMirroredEllipse = CGRect(x: mirroredX - itemSize, y: y, width: itemSize, height: itemSize)
+                    
+                    addShape(in: ellipse)
+                    addShape(in: horizontalMirroredEllipse)
+                    
+                case .vertical:
+                    
+                    guard yIndex <= grid.halfSize else { continue }
+                    
+                    let mirroredY = size.height - y
+                    let ellipse = CGRect(x: x, y: y, width: itemSize, height: itemSize)
+                    let verticalMirroredEllipse = CGRect(x: x, y: mirroredY - itemSize, width: itemSize, height: itemSize)
+                    
+                    addShape(in: ellipse)
+                    addShape(in: verticalMirroredEllipse)
+                    
+                case .both:
+                    
+                    guard xIndex <= grid.halfSize &&
+                        yIndex <= grid.halfSize else { continue }
+                    
+                    let mirroredX = size.width - x
+                    let mirroredY = size.height - y
+                    let ellipse = CGRect(x: x, y: y, width: itemSize, height: itemSize)
+                    let horizontalMirroredEllipse = CGRect(x: mirroredX - itemSize, y: y, width: itemSize, height: itemSize)
+                    
+                    let verticalMirroredEllipse = CGRect(x: x, y: mirroredY - itemSize, width: itemSize, height: itemSize)
+                    let bothMirroredEllipse = CGRect(x: mirroredX - itemSize, y: mirroredY - itemSize, width: itemSize, height: itemSize)
+                    
+                    addShape(in: ellipse)
+                    addShape(in: verticalMirroredEllipse)
+                    addShape(in: horizontalMirroredEllipse)
+                    addShape(in: bothMirroredEllipse)
                 }
+                context.fillPath()
             }
         }
-        
         context.setFillColor(UIColor.label.cgColor)
         context.fillPath()
+    }
+                         
+    
+    static func saveImageToPhotoLibrary(using grid: Grid,
+                                        contextSize: CGSize,
+                                        completion: @escaping (Bool) -> Void) {
+        
+        UIGraphicsBeginImageContext(contextSize)
+        
+        guard let context = UIGraphicsGetCurrentContext() else {
+            completion(false)
+            return
+        }
+        
+        drawGrid(using: grid, context: context, size: contextSize)
         
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
             completion(false)
@@ -101,7 +141,7 @@ class ImageRenderer {
         }
     }
     
-    static func requestPhotoAdditionPermission(completion: @escaping (Bool) -> Void) {
+    static private func requestPhotoAdditionPermission(completion: @escaping (Bool) -> Void) {
         PHPhotoLibrary.requestAuthorization { (status) in
             switch status {
             case .authorized:

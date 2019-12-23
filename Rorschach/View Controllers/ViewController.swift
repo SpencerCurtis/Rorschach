@@ -16,23 +16,32 @@ class ViewController: UIViewController {
     @IBOutlet weak var gridSizeSlider: UISlider!
     @IBOutlet weak var gridSizeLabel: UILabel!
     
+    var gridItemTapRecognizer: UITapGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        changeMirroring(self)
-        changeGridSize(self)
-        changeShape(self)
-        
+       
+        rorschachView.grid.size = 16
         gridSizeLabel.text = "Grid Size: \(Int(gridSizeSlider.value))"
-
+        
+        gridItemTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleGridItemSelection))
+        rorschachView.addGestureRecognizer(gridItemTapRecognizer)
+    }
+    
+    @objc func toggleGridItemSelection(_ recognizer: UITapGestureRecognizer) {
+        let point = recognizer.location(in: rorschachView)
+        
+        rorschachView.toggleDrawing(at: point)
     }
 
     @IBAction func redraw(_ sender: Any) {
+        rorschachView.grid.resetGrid()
         rorschachView.setNeedsDisplay()
     }
     
     @IBAction func changeMirroring(_ sender: Any) {
         rorschachView.grid.mirroring = Mirroring.allCases[mirroringSelector.selectedSegmentIndex]
+        rorschachView.grid.resetGrid()
         rorschachView.setNeedsDisplay()
     }
     
@@ -60,7 +69,7 @@ class ViewController: UIViewController {
             title = success ? "Image saved successfully!" : "Image was unable to be saved."
             
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             
             DispatchQueue.main.async {

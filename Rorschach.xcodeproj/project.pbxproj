@@ -83,10 +83,10 @@
 			isa = PBXGroup;
 			children = (
 				46CECCBC2394D42F0063FB47 /* View Controllers */,
-				46CECCBB2394D4290063FB47 /* Helpers */,
 				46CECCBA2394D4250063FB47 /* Model */,
 				46CECCB92394D41E0063FB47 /* Views */,
 				462E31C12394D3E00027D782 /* Storyboards */,
+				46CECCBB2394D4290063FB47 /* Helpers */,
 				462E31C02394D3D70027D782 /* Resources */,
 			);
 			path = Rorschach;
